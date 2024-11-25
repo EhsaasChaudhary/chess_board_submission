@@ -60,5 +60,3 @@ Goto [npm redux](https://www.npmjs.com/package/redux) and use the following npm 
 npm install @reduxjs/toolkit react-redux
 ```
 
-```
-
