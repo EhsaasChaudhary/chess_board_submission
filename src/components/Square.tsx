@@ -1,12 +1,13 @@
-import React from "react";
-import { useDispatch } from "react-redux";
-import { toggleSquareColor } from "../redux/boardSlice";
-import { AppDispatch } from "../redux/Store";
+import React from 'react';
+import { useDispatch } from 'react-redux';
+import { toggleSquareColor } from '../redux/boardSlice';
+import { AppDispatch } from '../redux/Store';
+
 
 interface SquareProps {
   row: number;
   col: number;
-  color: "white" | "black" | "yellow" | "red";
+  color: string;
 }
 
 const Square: React.FC<SquareProps> = ({ row, col, color }) => {
@@ -20,11 +21,11 @@ const Square: React.FC<SquareProps> = ({ row, col, color }) => {
     <div
       onClick={handleClick}
       style={{
-        width: "50px",
-        height: "50px",
+        width: '50px',
+        height: '50px',
         backgroundColor: color,
-        display: "inline-block",
-        border: "1px solid #000",
+        display: 'inline-block',
+        border: '1px solid #000',
       }}
     ></div>
   );

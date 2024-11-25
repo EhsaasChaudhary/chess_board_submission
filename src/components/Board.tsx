@@ -1,15 +1,15 @@
-import React from "react";
-import { useSelector } from "react-redux";
-import Square from "./Square";
-import { RootState } from "../redux/Store";
+import React from 'react';
+import { useSelector } from 'react-redux';
+import Square from './Square';
+import { RootState } from '../redux/Store';
 
 const Board: React.FC = () => {
-  const board = useSelector((state: RootState) => state.board);
+  const board = useSelector((state: RootState) => state.board.squares);
 
   return (
     <div>
       {board.map((row, rowIndex) => (
-        <div key={rowIndex} style={{ display: "flex" }}>
+        <div key={rowIndex} style={{ display: 'flex' }}>
           {row.map((square, colIndex) => (
             <Square
               key={`${rowIndex}-${colIndex}`}

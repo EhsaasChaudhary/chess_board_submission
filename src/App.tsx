@@ -9,18 +9,19 @@ const App: React.FC = () => {
       <div
         style={{
           display: 'flex',
+          flexDirection: 'column',
           justifyContent: 'center',
           alignItems: 'center',
-          flexDirection: 'column',
-          height: '100vh', // Full height of the viewport
-          margin: '0',
+          height: '90vh',
+          textAlign: 'center',
         }}
       >
-        <h1 style={{ marginBottom: '20px' }}>Chess Board</h1>
+        <h1 style={{ marginBottom: '20px', color: 'white' }}>Chess Board</h1>
         <Board />
       </div>
     </Provider>
   );
 };
+
 
 export default App;

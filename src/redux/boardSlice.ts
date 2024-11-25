@@ -1,42 +1,48 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-// Define the type for a single square
-interface Square {
-  color: "white" | "black" | "yellow" | "red";
+export interface SquareState {
+  color: string;
 }
 
-// Define the type for the board
-type BoardState = Square[][];
+export interface BoardState {
+  squares: SquareState[][];
+  selectedSquare: { row: number; col: number } | null; // Tracks the selected square
+}
 
-// Initialize an 8x8 chessboard
-const initialState: BoardState = Array(8)
-  .fill(null)
-  .map((_, row) =>
-    Array(8)
-      .fill(null)
-      .map((_, col) => ({
-        color: (row + col) % 2 === 0 ? "white" : "black",
-      }))
-  );
+// Initial state
+const initialState: BoardState = {
+  squares: Array(8).fill(null).map((_, row) =>
+    Array(8).fill(null).map((_, col) => ({
+      color: (row + col) % 2 === 0 ? 'white' : 'black',
+    }))
+  ),
+  selectedSquare: null,
+};
 
+// Slice
 const boardSlice = createSlice({
-  name: "board",
+  name: 'board',
   initialState,
   reducers: {
-    toggleSquareColor: (
-      state,
-      action: PayloadAction<{ row: number; col: number }>
-    ) => {
+    toggleSquareColor: (state, action: PayloadAction<{ row: number; col: number }>) => {
       const { row, col } = action.payload;
-      const square = state[row][col];
-      if (square.color === "white") {
-        square.color = "yellow";
-      } else if (square.color === "black") {
-        square.color = "red";
-      }
+
+      // Reset all squares to default colors
+      state.squares = state.squares.map((rowArr, rowIndex) =>
+        rowArr.map((square, colIndex) => ({
+          color: (rowIndex + colIndex) % 2 === 0 ? 'white' : 'black',
+        }))
+      );
+
+      // Update the selected square
+      state.selectedSquare = { row, col };
+
+      // Change the color of the clicked square
+      const clickedSquare = state.squares[row][col];
+      clickedSquare.color = clickedSquare.color === 'white' ? 'yellow' : 'red';
     },
   },
 });
 
 export const { toggleSquareColor } = boardSlice.actions;
-export default boardSlice.reducer;
+export const boardReducer = boardSlice.reducer;
